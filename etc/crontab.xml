@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/crontab.xsd">
+    <group id="default">
+        <job name="custom_erp_update_products" instance="Custom\ErpIntegration\Cron\UpdateErpProducts" method="execute">
+            <schedule>*/1 * * * *</schedule>
+             <config_path>system/config/path</config_path>
+        </job>
+    </group>
+</config>

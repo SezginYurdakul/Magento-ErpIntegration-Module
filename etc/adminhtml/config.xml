@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+    Default config for ERP Integration
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/config.xsd">
+    <default>
+        <erp_integration>
+            <general>
+                <json_path>var/import/erp_products.json</json_path>
+            </general>
+        </erp_integration>
+    </default>
+</config>

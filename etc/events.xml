@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- Observer registration for ERP order export -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_place_after">
+        <observer name="custom_erp_order_export" instance="Custom\ErpIntegration\Observer\OrderPlaceAfterObserver" />
+    </event>    
+    <event name="order_cancel_after">
+        <observer name="custom_erp_order_cancel_export" instance="Custom\ErpIntegration\Observer\OrderCancelAfterObserver" />
+    </event>
+</config>
