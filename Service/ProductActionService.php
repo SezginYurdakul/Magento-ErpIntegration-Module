@@ -9,7 +9,6 @@ use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory;
 use Magento\InventoryApi\Api\SourceItemsSaveInterface;
-use Custom\ErpIntegration\Logger\ErpIntegrationLogger;
 use Custom\ErpIntegration\Service\ProductInputValidator;
 
 class ProductActionService
@@ -18,7 +17,6 @@ class ProductActionService
     private SourceItemsSaveInterface $sourceItemsSave;
     private SourceItemInterfaceFactory $sourceItemFactory;
     private ProductFactory $productFactory;
-    private ErpIntegrationLogger $erpLogger;
     private ProductInputValidator $inputValidator;
     private const DEFAULT_SOURCE = 'default';
     private const STATUS_ENABLED = 1;
@@ -29,14 +27,12 @@ class ProductActionService
         SourceItemsSaveInterface $sourceItemsSave,
         SourceItemInterfaceFactory $sourceItemFactory,
         ProductFactory $productFactory,
-        ErpIntegrationLogger $erpLogger,
         ProductInputValidator $inputValidator
     ) {
         $this->productRepository = $productRepository;
         $this->sourceItemsSave = $sourceItemsSave;
         $this->sourceItemFactory = $sourceItemFactory;
         $this->productFactory = $productFactory;
-        $this->erpLogger = $erpLogger;
         $this->inputValidator = $inputValidator;
     }
 

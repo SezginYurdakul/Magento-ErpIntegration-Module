@@ -23,6 +23,14 @@
 
 ## Usage
 
+### Before you start using the module, you need to configure it:
+
+First, log in to the Magento Admin panel. Navigate to Stores → Configuration → ERP Integration.
+
+Next, decide where you will create your JSON files. Remember that the root folder of your project is considered the src directory. Enter the paths to your JSON files in the appropriate fields on the ERP Integration configuration page, making sure the paths are relative to the src folder. Then, create your JSON files in these specified directories.
+
+<img src="./media/image.png" alt="alt text" width="600" height="400">
+
 You can use the module in two ways:
 
 ### 1. Console Command
@@ -30,11 +38,13 @@ You can use the module in two ways:
 Run the following command to manually trigger the integration:
 
 ```bash
-php bin/magento erp:products:update
+php bin/magento erp:products:run
 ```
 If you want to specify file path, add the file path to the command
+
 ```bash
 php bin/magento erp:integration:run var/import/erp_products.json
+```
 
 ### 2. Automatic via Cron
 

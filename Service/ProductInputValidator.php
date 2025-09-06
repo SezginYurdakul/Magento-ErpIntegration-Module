@@ -79,7 +79,7 @@ class ProductInputValidator
     }
 
     /**
-     * Validate product update
+     * Validate product price or quantity update
      */
     public function validateUpdate(array $productData, array &$errors = []): bool
     {
@@ -89,19 +89,25 @@ class ProductInputValidator
             $errors[] = sprintf('Product with SKU "%s" could not be updated: price cannot be negative (%.2f)', $sku, $productData['price']);
             $valid = false;
         }
-        if (!isset($productData['sources']) || !is_array($productData['sources'])) {
-            $errors[] = sprintf('Product with SKU "%s" could not be updated: sources array is missing or invalid.', $sku);
-            $valid = false;
-        } else {
-            foreach ($productData['sources'] as $idx => $source) {
-                $sourceCode = $source['source_code'] ?? 'unknown';
-                if (!isset($source['quantity'])) {
-                    $errors[] = sprintf('Product with SKU "%s" could not be updated: quantity for source "%s" is missing', $sku, $sourceCode);
-                    $valid = false;
-                } elseif ($source['quantity'] < 0) {
-                    $errors[] = sprintf('Product with SKU "%s" could not be updated: quantity for source "%s" cannot be negative (%.2f)', $sku, $sourceCode, $source['quantity']);
-                    $valid = false;
-                }
+
+        if (!isset($productData['sources']) || !is_array($productData['sources']) || count($productData['sources']) === 0) {
+            return $valid;
+        }
+
+        foreach ($productData['sources'] as $idx => $source) {
+            if (!isset($source['source_code']) || $source['source_code'] === '') {
+                $errors[] = sprintf('Product with SKU "%s" could not be updated: source_code is missing for one of the sources.', $sku);
+                $valid = false;
+                $sourceCode = 'unknown';
+            } else {
+                $sourceCode = $source['source_code'];
+            }
+            if (!isset($source['quantity'])) {
+                $errors[] = sprintf('Product with SKU "%s" could not be updated: quantity for source "%s" is missing', $sku, $sourceCode);
+                $valid = false;
+            } elseif ($source['quantity'] < 0) {
+                $errors[] = sprintf('Product with SKU "%s" could not be updated: quantity for source "%s" cannot be negative (%.2f)', $sku, $sourceCode, $source['quantity']);
+                $valid = false;
             }
         }
         return $valid;
